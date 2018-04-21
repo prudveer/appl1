@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {HttpModule} from '@angular/http';
+//import { ContinentService } from './continentService';
 
 
 import { AppComponent } from './app.component';
+import { ReturnStatement } from '@angular/compiler';
 
 
 @NgModule({
@@ -10,9 +13,14 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, HttpModule
   ],
-  providers: [],
+  providers: [
+    //ContinentService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+  static get Name(): string { return 'AppModule'; }
+}
