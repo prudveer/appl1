@@ -38,12 +38,20 @@
         </h2><br />
         <div align="center"> 
             <label for="CountryTypeDDL" class="control-label label-title"> now select the country</label>
-            <select (change)="onSelect($event.target.value)">
-                    <option></option>              
-                  <option *ngFor="let country of countries">
-                    {{country.name}}
-                  </option>
-                  </select> 
+            <!-- <multiselect class="input-xlarge multiselect" 
+             options="p.key as p.value for p in vm.options2" select-limit="5"
+            header="Select" selected-header="options selected" 
+            multiple="true" required
+            enable-filter="true" filter-placeholder="Filter stuff..">
+          </multiselect> -->
+            
+               <div class="checkbox" *ngFor="let count of country">
+                   <label>
+                      <input  type="checkbox" 
+                       (change)="onSelectCountry($event.target.value,$event)">{{count.name}}
+                   </label>
+                 </div>
+
         </div>
     </div>
     <!-- Step 3 -->
@@ -52,6 +60,7 @@
             Selected Flags:
         </h2><br />
         <div align="center"> 
+          {{flag}}<br/>
             <button type="ClearFlags" class="btn btn-primary" id="ClearBtn">
                 ClearFlags
             </button>

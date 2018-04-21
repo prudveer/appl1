@@ -3,21 +3,15 @@ import * as data from './data/continents.json';
 import { Pipe, PipeTransform } from '@angular/core';
 const continentsData= data;
 console.log(continentsData);
-@Pipe({
-  name: 'keys',
-  pure: false
-})
-export class KeysPipe implements PipeTransform {
-  transform(value, args: string[]): any {
-      return Object.keys(value);
-  }
-}
-// export class Country {
-//   constructor(public flag: string,
-//     public name: string) {
+// @Pipe({
+//   name: 'keys',
+//   pure: false
+// })
+// export class KeysPipe implements PipeTransform {
+//   transform(value, args: string[]): any {
+//       return Object.keys(value);
 //   }
 // }
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -29,28 +23,50 @@ export class AppComponent implements OnInit {
   continentOptions: any;
   name:string;
   selectedContinent:string;
+  flag:string;
   allContinentsData:any= continentsData;
-  continent:string;
-  countries:any[];
+  //continent:string;
+  country:any=[];
+  checkedList:any=[];
+  
   //countries: Country[] = [{flag:null,name:null}];
   constructor() { 
-    
+    this.country=[]; 
+    this.checkedList=[];   
   }
   ngOnInit() {    
   }
   onSelect(selectedContinent) {
+    var that = this;
+    that.country = [];
     this.allContinentsData.forEach(function(res){
       if(res.continent===selectedContinent) {
         res.countries.forEach(function(result){
-          
-          console.log("result->"+result.name);
-          //this.countries.push({'flag':result.flag,'name':result.name});
-          //this.countries.push(new Country(result.flag,result.name));
-          console.log("this.countries->"+this.countries)
+          that.country.push(result);
         })              
-      }
-      
+      }      
     })
+  }
+  onSelectCountry(selectedCountry,event) {
+    var the = this;
+    if(event.target.checked) {
+      the.checkedList.push(selectedCountry);
+    } else {
+      for(var i=0 ; i < the.country.length; i++) {
+        if(the.checkedList[i] == selectedCountry){
+          the.checkedList.splice(i,1);
+        }
+      }
+    }
+    console.log(the.checkedList);
+  //   console.log("selectedCountry->"+selectedCountry);
+  //   console.log("the.country.name->"+the.country)
+  //  for(let co of the.country) {
+  //    console.log("co->"+co.name)
+  //  if(co.name == selectedCountry) {
+  //   the.flag = co.flag;
+  //  }  
+  //  }   
   }
   
 }
