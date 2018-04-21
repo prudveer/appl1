@@ -31,12 +31,12 @@ export class AppComponent implements OnInit {
   selectedContinent:string;
   allContinentsData:any= continentsData;
   continent:string;
-  //countries:any[];
-  countries: Country[] = [{flag:null,name:null}];
+  countries:any[];
+  //countries: Country[] = [{flag:null,name:null}];
   constructor() { 
     
   }
-  ngOnInit() {
+  ngOnInit() {    
   }
   onSelect(selectedContinent) {
     this.allContinentsData.forEach(function(res){
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
         res.countries.forEach(function(result){
           
           console.log("result->"+result.name);
-          this.countries.push({'flag':result.flag,'name':result.name});
+          //this.countries.push({'flag':result.flag,'name':result.name});
           //this.countries.push(new Country(result.flag,result.name));
           console.log("this.countries->"+this.countries)
         })              
